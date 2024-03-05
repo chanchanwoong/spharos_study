@@ -1,7 +1,9 @@
-package com.spharos.ssgdotcom.member.model;
+package com.spharos.ssgdotcom.member.domain;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * setter를 쓰면 엔티티 오염이 될 수 있다.
@@ -11,6 +13,8 @@ import lombok.Builder;
  * 데이터 변경이 안되는 것, VO와 DTO 관련이 있나?
  */
 @Entity     // 영속성을 부여, DB에 들어갈 테이블 역할을 한다.
+@Getter     // Getter만 있으면 된다.
+@NoArgsConstructor      // 기본 생성자
 @Table(name = "member_table")     // 테이블 명칭 부여하고 테이블을 생성해준다.
 public class Member {
     @Id     // primary key로 설정

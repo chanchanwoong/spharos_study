@@ -1,6 +1,6 @@
 package com.spharos.ssgdotcom.cart.model;
 
-import com.spharos.ssgdotcom.member.model.Member;
+import com.spharos.ssgdotcom.member.domain.Member;
 import com.spharos.ssgdotcom.product.model.Product;
 import jakarta.persistence.*;
 
