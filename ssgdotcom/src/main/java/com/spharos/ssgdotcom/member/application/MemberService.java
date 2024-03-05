@@ -7,4 +7,5 @@ import com.spharos.ssgdotcom.member.dto.ModifyPasswordDto;
 public interface MemberService {
     void modifyUserPwd(ModifyPasswordDto modifyPasswordDto, Object userId);
     Member createMember(MemberDto memberDto);
+    Member getMember(Long id);
 }

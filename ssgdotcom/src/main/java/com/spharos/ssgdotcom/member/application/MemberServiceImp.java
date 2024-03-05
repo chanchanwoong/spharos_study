@@ -30,4 +30,10 @@ public class MemberServiceImp implements MemberService{
 
         return memberRepository.save(member);
     }
+
+    @Override
+    public Member getMember(Long id) {
+        return memberRepository.findById(id).orElse(null);
+    }
+
 }

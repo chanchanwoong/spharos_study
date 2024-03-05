@@ -26,9 +26,9 @@ public class Member {
     private String email;
     private String phone;
     private String address;
-    @Column(columnDefinition = "TINYINT", length = 1, nullable = false)     // 컬럼의 상세 옵션 선택 가능
+    @Column(columnDefinition = "TINYINT", length = 1, nullable = true)     // 컬럼의 상세 옵션 선택 가능
     private Short gender;
-
+    @Column(nullable = true)
     private String codeName;
 
     @Builder
