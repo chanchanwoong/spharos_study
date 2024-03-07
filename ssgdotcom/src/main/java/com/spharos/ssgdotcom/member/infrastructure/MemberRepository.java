@@ -14,4 +14,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     // 여러 개를 찾을 때는 All 단어를 붙히고 ArrayList 타입으로 반환한다.
     ArrayList<Member> findAllByGender(Short gender);
+
+    // Id를 이용한 로그인
+    Optional<Member> findByLoginId(String loginId);
 }
