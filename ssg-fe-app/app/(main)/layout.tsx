@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 
-import "./globals.css";
+import "../globals.css";
 import SsgLogo from "@/images/svgs/SsgLogo";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
