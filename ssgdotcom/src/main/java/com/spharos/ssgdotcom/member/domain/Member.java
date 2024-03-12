@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 
 @Entity
+@ToString
 @Getter
 @NoArgsConstructor
 public class Member implements UserDetails{
@@ -25,7 +27,6 @@ public class Member implements UserDetails{
     private String password;
     private String loginId;
     private String uuid;
-//    private UUID uuid;
     @Getter
     private String name;
     private String email;
@@ -69,7 +70,7 @@ public class Member implements UserDetails{
 
     @Override
     public String getUsername() {
-        return uuid.toString();
+        return uuid;
     }
 
     @Override

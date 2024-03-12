@@ -29,4 +29,5 @@ public class MemberController {
     public Member getMember(@PathVariable Long id) {
         return memberService.getMember(id);
     }
+
 }

@@ -15,7 +15,7 @@ spring:
 
 # JWT 관련 값을 주입시켜 생성시켜야 한다. 밖으로 노출되면 안된다.
 JWT:
-  secret-key: ssg
+  SECRET_KEY: 6286783ee2dc2582300bd874944c3292ea903bfb93aa1e3f70a86fc40c042fc7
   EXPIRATION_TIME: 300000     # 한 시간
 #  refresh-token-expiration: 86400000      # 일주일
 

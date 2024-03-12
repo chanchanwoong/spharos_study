@@ -9,15 +9,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @Slf4j
 @Service
-public class AuthServiceImpl implements AuthService {
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService{
 
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
@@ -25,40 +24,35 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void signUp(SignUpRequestVo signUpRequestVo) {
-        Member member = this.createMember(signUpRequestVo);
-        // 위 메서드로 DB에 잘 들어갔다는 가정하에 진행
 
-//        String token = this.createToken(member);
-//        log.info("token: {}");
+        Member member = this.createMember(signUpRequestVo);
         log.info("member: {}", member);
+
 
     }
 
     @Override
     public void logIn(LogInRequestVo logInRequestVo) {
         Member member = memberRepository.findByLoginId(logInRequestVo.getLoginId())
-                .orElseThrow(() -> new IllegalAccessError("존재하지 않는 아이디입니다."));
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        logInRequestVo.getLoginId(),
-//                        logInRequestVo.getPassword()
-//                )
-//        );
-//        String token = createToken(member);
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다"));
         log.info("member: {}", member);
-//        log.info("token: {}", token);
-        String jwt = this.createToken(member);
-        log.info("jwt: {}", jwt);
+        log.info("member.getPassword(): {}", logInRequestVo.getPassword());
+        log.info("member.getUsername(): {}", member.getUsername());
         authenticationManager.authenticate(
+
+
                 new UsernamePasswordAuthenticationToken(
                         member.getUsername(),
                         logInRequestVo.getPassword()
                 )
         );
-        log.info("로그인 성공");
+        String token = createToken(member);
+        log.info("token: {}", token);
+
     }
 
-    private Member createMember(SignUpRequestVo signUpRequestVo){
+    private Member createMember(SignUpRequestVo signUpRequestVo) {
+
         UUID uuid = UUID.randomUUID();
 //        Member member = new Member(uuid);
 //        member.hashPassword(signUpRequestVo.getPassword());
