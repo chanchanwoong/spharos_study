@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 
 @Entity
@@ -24,6 +25,7 @@ public class Member implements UserDetails{
     private String password;
     private String loginId;
     private String uuid;
+//    private UUID uuid;
     @Getter
     private String name;
     private String email;
@@ -35,14 +37,19 @@ public class Member implements UserDetails{
     private String codeName;
 
     @Builder
-    public Member(String password, String loginId ,String name, String email, String phone, String address, Short gender) {
+    public Member(String password, String uuid, String loginId ,String name, String email, String phone, String address, Short gender) {
         this.password = password;
+        this.uuid = uuid;
         this.loginId = loginId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
+    }
+
+    public Member(String uuid) {
+        this.uuid = uuid;
     }
 
     public void hashPassword(String password) {
@@ -62,7 +69,7 @@ public class Member implements UserDetails{
 
     @Override
     public String getUsername() {
-        return uuid;
+        return uuid.toString();
     }
 
     @Override
