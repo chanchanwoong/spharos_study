@@ -16,5 +16,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     ArrayList<Member> findAllByGender(Short gender);
 
     // Id를 이용한 로그인
-    Optional<Member> findByLoginId(String loginId);
+    Optional<Member> findByUuid(String uuid);
 }

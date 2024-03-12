@@ -16,6 +16,16 @@ spring:
 # JWT 관련 값을 주입시켜 생성시켜야 한다. 밖으로 노출되면 안된다.
 JWT:
   secret-key: ssg
-  access-token-expiration: 300000     # 한 시간
-  refresh-token-expiration: 86400000      # 일주일
+  EXPIRATION_TIME: 300000     # 한 시간
+#  refresh-token-expiration: 86400000      # 일주일
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: true
+    display-request-duration: true
+  api-docs:
+    path: /api-docs
+  show-actuator: true
