@@ -3,6 +3,7 @@ package com.spharos.ssgdotcom.member.application;
 import com.spharos.ssgdotcom.member.domain.Member;
 import com.spharos.ssgdotcom.member.infrastructure.MemberRepository;
 import com.spharos.ssgdotcom.member.vo.LogInRequestVo;
+import com.spharos.ssgdotcom.member.vo.LoginResponseVo;
 import com.spharos.ssgdotcom.member.vo.SignUpRequestVo;
 import com.spharos.ssgdotcom.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -32,15 +33,13 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public void logIn(LogInRequestVo logInRequestVo) {
+    public LoginResponseVo logIn(LogInRequestVo logInRequestVo) {
         Member member = memberRepository.findByLoginId(logInRequestVo.getLoginId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다"));
         log.info("member: {}", member);
         log.info("member.getPassword(): {}", logInRequestVo.getPassword());
         log.info("member.getUsername(): {}", member.getUsername());
         authenticationManager.authenticate(
-
-
                 new UsernamePasswordAuthenticationToken(
                         member.getUsername(),
                         logInRequestVo.getPassword()
@@ -48,6 +47,13 @@ public class AuthServiceImpl implements AuthService{
         );
         String token = createToken(member);
         log.info("token: {}", token);
+
+        return LoginResponseVo.builder()
+                .token(token)
+                .name(member.getName())
+                .email(member.getEmail())
+                .uuid(member.getUuid())
+                .build();
 
     }
 

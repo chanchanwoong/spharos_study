@@ -1,8 +1,10 @@
 package com.spharos.ssgdotcom.member.presentation;
 
+import com.spharos.ssgdotcom.common.response.BaseResponse;
 import com.spharos.ssgdotcom.member.application.AuthService;
 import com.spharos.ssgdotcom.member.domain.Member;
 import com.spharos.ssgdotcom.member.vo.LogInRequestVo;
+import com.spharos.ssgdotcom.member.vo.LoginResponseVo;
 import com.spharos.ssgdotcom.member.vo.SignUpRequestVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +22,15 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping()
-    public void signUp(@RequestBody SignUpRequestVo signUpRequestVo) {
+    public BaseResponse<?> signUp(@RequestBody SignUpRequestVo signUpRequestVo) {
         log.info("signUpRequestVo: {}", signUpRequestVo);
         authService.signUp(signUpRequestVo);
+        return new BaseResponse<>();
     }
 
     @PostMapping("/login")
-    public void logIn(@RequestBody LogInRequestVo logInRequestVo) {
+    public BaseResponse<LoginResponseVo> logIn(@RequestBody LogInRequestVo logInRequestVo) {
         log.info("logIn");
-        authService.logIn(logInRequestVo);
+        return new BaseResponse<>(authService.logIn(logInRequestVo));
     }
 }

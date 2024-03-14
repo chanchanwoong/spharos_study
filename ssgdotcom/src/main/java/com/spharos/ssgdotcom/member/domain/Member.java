@@ -1,5 +1,6 @@
 package com.spharos.ssgdotcom.member.domain;
 
+import com.spharos.ssgdotcom.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @ToString
 @Getter
 @NoArgsConstructor
-public class Member implements UserDetails{
+public class Member extends BaseTimeEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
