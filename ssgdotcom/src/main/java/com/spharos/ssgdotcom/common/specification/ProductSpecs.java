@@ -7,9 +7,9 @@ public class ProductSpecs {
 
     public static Specification<Product> withCategory(Integer categoryId) {
         if (categoryId == 0) {
-            return ( root, query, builder) -> builder.isNotNull(root.get("category").get("id")); // return all products if categoryId is 0
+            return ( root, query, builder) -> builder.isNotNull(root.get("categoryId")); // return all products if categoryId is 0
         }
-        return (root, query, builder) -> builder.equal(root.get("category").get("id"), categoryId);
+        return (root, query, builder) -> builder.equal(root.get("categoryId"), categoryId);
     }
 
     public static Specification<Product> withPrice(Integer minPrice, Integer maxPrice) {
