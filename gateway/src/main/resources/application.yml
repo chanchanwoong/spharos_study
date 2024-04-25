@@ -13,12 +13,11 @@ spring:
     name: api-gateway-service
 
   cloud:
-    routes:
-      - id: member-service
-        uri: lb:http://localhost:9001/
-        predicates:
-          - Path=/first-service/**
-      - id: member-service
-        uri: lb:http://localhost:9002/
-        predicates:
-          - Path=/second-service/**
+    gateway:
+      routes:
+        - id: member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/**
+          filters:
+            - StripPrefix=1
