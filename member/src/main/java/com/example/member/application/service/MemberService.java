@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class MemberService implements MemberUseCase {
+
     private final MemberPort memberPort;
 
-
     @Override
-    public void signUpMember(SignUpQuery signUpQuery) {
-        memberPort.signUpMember(Member.signUp(signUpQuery));
+    public void signUpMember(SignUPQuery signUPQuery) {
+        memberPort.signUpMember(Member.signUp(signUPQuery));
     }
 }

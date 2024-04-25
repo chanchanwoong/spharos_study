@@ -15,17 +15,19 @@ public class MemberEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    private String name;
+    @Column
     private String email;
     @Column
     private String password;
     @Column
-    private String nickname;
+    private String nickName;
 
     public static MemberEntity fromMember(Member member) {
         return MemberEntity.builder()
                 .email(member.getEmail())
+                .nickName(member.getNickName())
                 .password(member.getPassword())
-                .nickname(member.getNickname())
                 .build();
     }
 }

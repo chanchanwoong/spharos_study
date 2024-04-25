@@ -7,23 +7,26 @@ import lombok.Getter;
 
 public interface MemberUseCase {
 
-    void signUpMember(SignUpQuery signUpQuery);
+
+    void signUpMember(SignUPQuery signUPQuery);
 
     @Getter
     @Builder
-    class SignUpQuery {
+    class SignUPQuery {
+
         private String name;
         private String email;
         private String password;
-        private String nickname;
+        private String nickName;
 
-        public static SignUpQuery toQuery(RequestMember requestMember) {
-            return SignUpQuery.builder()
+        public static SignUPQuery toQuery(RequestMember requestMember) {
+            return SignUPQuery.builder()
                     .name(requestMember.getName())
                     .email(requestMember.getEmail())
                     .password(requestMember.getPassword())
-                    .nickname(requestMember.getNickname())
+                    .nickName(requestMember.getNickName())
                     .build();
         }
+
     }
 }
