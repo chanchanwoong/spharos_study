@@ -1,40 +1,33 @@
 package com.spharos.mongodb.chat.service;
 
-import com.spharos.mongodb.chat.domain.Member;
+import com.spharos.mongodb.chat.domain.Chat;
 import com.spharos.mongodb.chat.repository.ChatRepository;
-import com.spharos.mongodb.chat.vo.MemberResponse;
-import com.spharos.mongodb.chat.vo.MemberVo;
+import com.spharos.mongodb.chat.vo.ChatVo;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
 @Service
 public class ChatServiceImpl implements ChatService {
     private final ChatRepository chatRepository;
 
-
     @Override
-    public void registerMember(MemberVo memberVo) {
+    public void sendChat(ChatVo chatVo) {
         chatRepository.save(
-            Member.builder()
-                .email(memberVo.getEmail())
-                .name(memberVo.getName())
-                .phone(memberVo.getPhone())
+            Chat.builder()
+                .msg(chatVo.getMsg())
+                .sender(chatVo.getSender())
+                .receiver(chatVo.getReceiver())
+                .createdAt(LocalDateTime.now())
                 .build()
-        );
+        ).subscribe();
     }
 
     @Override
-    public MemberResponse getMember(String email) {
-        Member member = chatRepository.findByEmail(email).orElseThrow(
-            () -> new RuntimeException("Member not found")
-        );
-
-        return MemberResponse.builder()
-            .id(member.getId())
-            .name(member.getName())
-            .phone(member.getPhone())
-            .email(email)
-            .build();
+    public Flux<Chat> getChat(String sender, String receiver) {
+        return chatRepository.findChatBySenderAndReceiver(sender, receiver);
     }
 }
