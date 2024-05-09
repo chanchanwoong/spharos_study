@@ -8,4 +8,6 @@ import reactor.core.publisher.Mono;
 public interface ChatService {
     void sendChat(ChatVo chatVo);
     Flux<Chat> getChat(String sender, String receiver);
+
+    Flux<Chat> getChatByRoomId(String roomId);
 }

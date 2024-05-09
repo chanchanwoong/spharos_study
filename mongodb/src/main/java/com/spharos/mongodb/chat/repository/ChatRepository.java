@@ -12,4 +12,8 @@ public interface ChatRepository extends ReactiveMongoRepository<Chat, String> {
     @Tailable
     @Query("{'sender':  ?0, 'receiver':  ?1}")
     Flux<Chat> findChatBySenderAndReceiver(String sender, String receiver);
+
+    @Tailable
+    @Query("{'receiver':  ?0}")
+    Flux<Chat> findChatByRoomId(String roomId);
 }

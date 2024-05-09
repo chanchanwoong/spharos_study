@@ -13,17 +13,21 @@ public class Chat {
 
     @Id
     private String Id;
+
+    private String roomId;
+
     private String msg;
     private String sender;
     private String receiver;
     private LocalDateTime createdAt;
 
     @Builder
-    public Chat(String msg, String sender, String receiver, LocalDateTime createdAt) {
+    public Chat(String msg, String sender, String roomId, LocalDateTime createdAt, String receiver) {
         this.msg = msg;
         this.sender = sender;
-        this.receiver = receiver;
+        this.roomId = roomId;
         this.createdAt = createdAt;
+        this.receiver = receiver;
     }
 
 }

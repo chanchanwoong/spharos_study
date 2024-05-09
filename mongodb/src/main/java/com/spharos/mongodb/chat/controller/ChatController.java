@@ -30,8 +30,15 @@ public class ChatController {
         return chatService.getChat(sender, receiver).subscribeOn(Schedulers.boundedElastic());
     }
 
+    @GetMapping(value = "/room/{roomId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Chat> getChatByRoomId(@PathVariable(value = "roomId") String roomId) {
+        return chatService.getChatByRoomId(roomId).subscribeOn(Schedulers.boundedElastic());
+    }
+
     @PostMapping
     public void sendChat(@RequestBody ChatVo chatVo) {
         chatService.sendChat(chatVo);
     }
+
+
 }
